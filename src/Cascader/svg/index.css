@@ -1,0 +1,20 @@
+.svgIcon-root {
+  fill: currentColor;
+}
+.arrow-icon {
+  width: 15px;
+  height: 15px;
+  color: #8190b8;
+}
+.checkbox {
+  width: 20px;
+  height: 20px;
+}
+.svgBox {
+  display: flex;
+  align-items: center;
+}
+.indeterminate-checkbox,
+.checked-checkbox {
+  color: #7a88fe;
+}

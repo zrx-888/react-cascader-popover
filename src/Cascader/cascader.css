@@ -1,0 +1,84 @@
+.cascader_popover {
+  display: flex;
+  border: 1px solid #7a88fe;
+  background: #fff;
+  border-radius: 10px;
+  margin-top: 5px;
+  max-height: 350px;
+  height: 300px;
+  overflow-y: hidden;
+}
+.cascader_popover_cell {
+  padding: 5px;
+  border-left: 1px solid #c0c7db;
+  height: 100%;
+  overflow-y: auto;
+}
+.cascader_popover_cell::-webkit-scrollbar {
+  width: 5px;
+}
+.cascader_popover_cell::-webkit-scrollbar-track {
+  background: #f5f5f5;
+  border-radius: 40px;
+}
+.cascader_popover_cell::-webkit-scrollbar-thumb {
+  border-radius: 40px;
+  background: #7a88fe;
+}
+::-webkit-scrollbar-thumb:hover {
+  cursor: "pointer";
+}
+.cascader_popover_cell* {
+  scrollbar-width: thin;
+  scrollbar-color: #7a88fe transparent;
+}
+.cascader_popover_cell:first-child {
+  border: 0;
+}
+.cascader_popover_cell_label_box {
+  height: 40px;
+  background: #fff;
+  border-radius: 7px 7px 7px 7px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  padding-right: 5px;
+  color: #242859;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+.cascader_popover_cell_label_box_ac {
+  background: #f7f8ff;
+  color: #7a88fe;
+  transition: all 0.3s linear;
+}
+.cascader_popover_cell_label_box .label .icon {
+  color: #8190b8;
+  display: flex;
+  align-items: center;
+  margin-right: 3px;
+}
+.cascader_popover_cell_label_box .label {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+}
+.cascader_popover_cell_label_box:hover .svgIcon-root {
+  color: #7a88fe;
+}
+.cascader_popover_cell .MuiFormControlLabel-root .MuiCheckbox-indeterminate {
+  color: #7a88fe;
+}
+.cascader_popover_cell_label_box:hover {
+  background: #f7f8ff;
+  color: #7a88fe;
+  transition: all 0.3s linear;
+}
+.cascader_popover_cell_label_box_arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
