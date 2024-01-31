@@ -1,10 +1,7 @@
 import { useRef, useState } from "react";
-import {
-  Cascader,
-  CascaderOption,
-  CascaderRefProps,
-} from "react-cascader-popover";
+import { CascaderOption, CascaderRefProps } from "react-cascader-popover";
 import { province } from "../data";
+import { Cascader } from "../Cascader/Cascader";
 
 function Multiple() {
   const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);

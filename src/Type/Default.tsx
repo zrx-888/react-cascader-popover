@@ -1,10 +1,7 @@
 import { useRef, useState } from "react";
 import { province } from "../data";
-import {
-  Cascader,
-  CascaderOption,
-  CascaderRefProps,
-} from "react-cascader-popover";
+import { CascaderOption, CascaderRefProps } from "react-cascader-popover";
+import { Cascader } from "../Cascader/Cascader";
 
 function Default() {
   const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);

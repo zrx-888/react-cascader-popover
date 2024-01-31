@@ -248,6 +248,12 @@ export default Multiple;
       <th>搜索框提示语</th>
     </tr>
     <tr>
+      <th>searchEmptyText</th>
+      <th>string</th>
+      <th>暂无数据</th>
+      <th>搜索后无数据提示语</th>
+    </tr>
+    <tr>
       <th>onChange</th>
       <th> (value: CascaderOption | null, valueAll: CascaderOption[]) => void</th>
       <th></th>
@@ -313,3 +319,5 @@ export default Multiple;
 1.0.7 多选时展开列表默认展示第一个数据
 
 1.1.0 增加输入框筛选 修复 onChange 触发问题
+
+1.1.4 增加在多选搜索的时候可以选择多个

@@ -53,3 +53,9 @@
   letter-spacing: 3px;
   cursor: no-drop;
 }
+.icon {
+  color: #8190b8;
+  display: flex;
+  align-items: center;
+  margin-right: 3px;
+}

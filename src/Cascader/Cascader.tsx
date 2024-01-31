@@ -47,12 +47,18 @@ interface CascaderProps {
    * 选中项ID
    */
   value?: string;
+  /**
+   * 是否打开
+   */
   open: boolean;
+  /**
+   * 目标元素的DOM
+   */
   anchorEl: HTMLDivElement | null;
   /**
    * {label: string;
    * value: string;
-   * children?:  CascaderOptionMultiple[]}
+   * children:[]}
    */
   options: CascaderOption[];
   /**
@@ -65,13 +71,17 @@ interface CascaderProps {
    */
   multiple?: boolean;
   /**
-   * 开启搜索
+   * 是否开启搜索
    */
   search?: boolean;
   /**
-   *
+   * 搜索输入框的placeholder
    */
   searchPlaceholder?: string;
+  /**
+   * 搜索空提示信息
+   */
+  searchEmptyText?: string;
 }
 export interface CascaderRefProps {
   setValue: (value: string[]) => void;
@@ -80,7 +90,11 @@ export interface CascaderRefProps {
 const Cascader = memo(
   forwardRef(
     (
-      { searchPlaceholder = "请输入关键词", ...props }: CascaderProps,
+      {
+        searchPlaceholder = "请输入关键词",
+        searchEmptyText = "暂无数据",
+        ...props
+      }: CascaderProps,
       ref: React.ForwardedRef<CascaderRefProps>
     ) => {
       const [list, setList] = useState<IListIF[]>([]);
@@ -479,11 +493,15 @@ const Cascader = memo(
         if (!props.multiple) {
           setRadioValue(value);
           initSelectValue(value);
+          props.onClose();
         } else {
           // 多选
-          setValue([...multipleValue, value]);
+          const newMultipleValue = multipleValue.includes(value)
+            ? multipleValue.filter((item) => item !== value)
+            : [...multipleValue, value];
+
+          setValue(newMultipleValue);
         }
-        props.onClose();
       };
 
       return (
@@ -553,6 +571,9 @@ const Cascader = memo(
               </div>
             ) : (
               <SearchList
+                searchEmptyText={searchEmptyText}
+                multiple={props.multiple}
+                multipleValue={multipleValue}
                 list={searchList}
                 searchValue={searchValue}
                 onChoose={handleOnChoose}

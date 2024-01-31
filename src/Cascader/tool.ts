@@ -1,7 +1,9 @@
 import { CascaderOption, CascaderOptionMultiple } from "./Cascader";
 export interface TreeSearchList {
+  checked?: boolean;
   pathName: string;
   pathValue: string;
+  value: string;
 }
 const deepClone = (obj: CascaderOption[]): CascaderOption[] => {
   if (obj === null || typeof obj !== "object") {
@@ -12,6 +14,7 @@ const deepClone = (obj: CascaderOption[]): CascaderOption[] => {
 
   for (let key in obj) {
     if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       clone[key] = deepClone(obj[key]);
     }
@@ -118,6 +121,7 @@ const generatePathList = (
       generatePathList(node.children, newPath, newValue, list);
     } else {
       list.push({
+        value: "",
         pathName: newPath,
         pathValue: newValue,
       });
