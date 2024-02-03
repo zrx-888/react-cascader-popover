@@ -10,6 +10,7 @@ const deepClone = (obj: CascaderOption[]): CascaderOption[] => {
     return obj;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const clone: any = Array.isArray(obj) ? [] : {};
 
   for (let key in obj) {
@@ -92,13 +93,13 @@ const generateIdPid = (
     }
   });
 };
-function debounce<T extends (...args: any[]) => void>(
+function debounce<T extends (...args: unknown[]) => void>(
   fn: T,
   delay: number
 ): (...args: Parameters<T>) => void {
   let timer: ReturnType<typeof setTimeout>;
 
-  return function (this: any, ...args: Parameters<T>): void {
+  return function (this: unknown, ...args: Parameters<T>): void {
     clearTimeout(timer);
 
     timer = setTimeout(() => {
@@ -130,6 +131,7 @@ const generatePathList = (
 
   return list;
 };
+
 export {
   deepClone,
   generatePathList,

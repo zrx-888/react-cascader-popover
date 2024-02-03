@@ -9,9 +9,25 @@ import {
 console.log(province);
 
 function Default() {
+  const options = [
+    {
+      value: "120000",
+      label: "天津市",
+      isLoad: true,
+      children: [],
+    },
+    {
+      value: "110000",
+      label: "北京市",
+      isLoad: true,
+      children: [],
+    },
+  ];
+
   const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
   const [valueAllPath, setValueAllPath] = useState<CascaderOption[]>([]);
-  const [value, setValue] = useState("130203");
+  const [value, setValue] = useState("120000");
+  const [num, setNum] = useState(0);
   const [valueItem, setValueItem] = useState<CascaderOption | null>(null);
   const cascaderRef = useRef<CascaderRefProps>(null);
 
@@ -37,6 +53,29 @@ function Default() {
   };
   const handleSet = () => {
     setValue("11010333555");
+  };
+
+  // 模拟接口返回数据
+  const getServiceData = (item: CascaderOption) => {
+    return new Promise<CascaderOption[]>((resolve) => {
+      setTimeout(() => {
+        const count = num + 1;
+        setNum(count);
+
+        resolve([
+          {
+            label: `${item.label} -1 `,
+            value: item.value + 1,
+            isLoad: count >= 2 ? false : true,
+          },
+        ]);
+      }, 1000);
+    });
+  };
+
+  const loadData = async (item: CascaderOption) => {
+    const data = await getServiceData(item);
+    return data;
   };
 
   const open = Boolean(anchorEl);
@@ -83,9 +122,10 @@ function Default() {
         value={value}
         open={open}
         anchorEl={anchorEl}
-        options={province}
+        options={options}
         onClose={() => setAnchorEl(null)}
         onChange={handleChange}
+        loadData={loadData}
       />
     </>
   );

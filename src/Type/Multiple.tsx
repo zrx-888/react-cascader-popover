@@ -6,7 +6,7 @@ import { Cascader } from "../Cascader/Cascader";
 function Multiple() {
   const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
   const [valueAll, setValueAll] = useState<CascaderOption[]>([]);
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState("11010333555");
   const cascaderRef = useRef<CascaderRefProps>(null);
   // 打开
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -17,7 +17,8 @@ function Multiple() {
     valueAll: CascaderOption[]
   ) => {
     console.log(valueAll, "选中的值");
-    setValue(valueAll.map((e) => e.value).join(","));
+    // 最好不要在复制给value
+    // setValue(valueAll.map((e) => e.value).join(","));
     setValueAll(valueAll);
   };
   const handleClear = () => {
