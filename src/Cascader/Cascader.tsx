@@ -4,13 +4,7 @@ import Arrow from "./svg/Arrow/Arrow";
 import Checkbox from "./svg/Checkbox";
 import Load from "./svg/Load";
 import SearchList from "./SearchList";
-import {
-  TreeSearchList,
-  deepClone,
-  findNodeLabelsByValues,
-  generateIdPid,
-  generatePathList,
-} from "./tool";
+import { deepClone, findNodeLabelsByValues, generateIdPid } from "./tool";
 import "./cascader.css";
 import "./search.css";
 
@@ -35,7 +29,7 @@ export interface CascaderOptionMultiple extends CascaderOption {
   cascaderNodeId?: string;
   parentCascaderNodeId?: string;
 }
-interface IListIF {
+export interface IListIF {
   list: CascaderOptionMultiple[];
   index: number;
   checked?: boolean;
@@ -102,7 +96,6 @@ const Cascader = forwardRef(
   ) => {
     const [list, setList] = useState<IListIF[]>([]);
     const [searchValue, setSearchValue] = useState("");
-    const [searchList, setSearchList] = useState<TreeSearchList[]>([]);
     // 记录已经选中的值（多选）
     const [multipleValue, setMultipleValue] = useState<string[]>([]);
     // 记录已经选中的值（单选）
@@ -147,6 +140,12 @@ const Cascader = forwardRef(
       listIndex: number,
       index: number
     ) => {
+      if (item.value === radioValue) {
+        return;
+      }
+      if (!item.isLoad && props.multiple) {
+        return;
+      }
       const newList = [...list];
       if (!item.isLoad) {
         newList[listIndex].index = index;
@@ -186,8 +185,8 @@ const Cascader = forwardRef(
             ...loadDataObj,
             [item.value]: res,
           });
-
           newList[listIndex].list[index].isLoading = false;
+          newList[listIndex].list[index].children = res;
           newList[listIndex + 1] = {
             list: res,
             index: -1,
@@ -203,6 +202,9 @@ const Cascader = forwardRef(
       listIndex: number,
       index: number
     ) => {
+      if (item.value === radioValue) {
+        return;
+      }
       const newList = [...list];
       if (!item.children || item.children.length === 0) {
         newList[listIndex].index = index;
@@ -246,6 +248,7 @@ const Cascader = forwardRef(
             delete itemd["parentCascaderNodeId"];
             delete itemd["checked"];
             delete itemd["indeterminateChecked"];
+            delete itemd["isLoading"];
             selectValue.push(itemd);
           }
           if (item.children && item.children.length) {
@@ -365,21 +368,29 @@ const Cascader = forwardRef(
         return;
       }
       const newOptions = deepClone(props.options);
-      const parent = findParentItemWithIndex(newOptions, targetValue, [], []);
+      const parent = findParentItemWithIndex(
+        props.loadData ? list[0].list : newOptions,
+        targetValue,
+        [],
+        []
+      );
       if (parent) {
         const newList: IListIF[] = [];
         parent.parentItems.forEach((item, index) => {
-          if (item.children) {
+          if (item.children && item.children.length) {
             newList.push({
               list: item.children,
               index: parent.parentIndexes[index + 1],
             });
           }
         });
-        const selectValueOption = newList[newList.length - 1].list.filter(
-          (item) => item.value === targetValue
-        );
+        const selectValueOption = newList.length
+          ? newList[newList.length - 1].list.filter(
+              (item) => item.value === targetValue
+            )
+          : [];
         if (selectValueOption.length) {
+          setRadioValue(selectValueOption[0].value + "");
           props.onChange(selectValueOption[0], parent.parentItems);
         }
         setList([
@@ -416,10 +427,10 @@ const Cascader = forwardRef(
           }
         });
       }
-      if (props.search) {
-        const list = generatePathList(props.options);
-        setSearchList(list);
-      }
+      // if (props.search) {
+      //   const list = generatePathList(props.options);
+      //   setSearchList(list);
+      // }
     }, [props.anchorEl]);
 
     // 多选设置选中
@@ -435,6 +446,7 @@ const Cascader = forwardRef(
       const newOptions = deepClone(props.options);
       let newList = [...list];
       const newOptionsList: IListIF[] = [];
+
       if (newList.length) {
         // 当只有一级的时候 改成false
         if (newList.length === 1) {
@@ -465,6 +477,7 @@ const Cascader = forwardRef(
       );
 
       generateIdPid(list.length ? list[0].list : newOptions, valueResult);
+
       if (valueResult.length) {
         const firstTermList = newList.length
           ? newList[0].list.filter((e) => e.value === valueResult[0][0])
@@ -559,7 +572,6 @@ const Cascader = forwardRef(
         const newMultipleValue = multipleValue.includes(value)
           ? multipleValue.filter((item) => item !== value)
           : [...multipleValue, value];
-
         setValue(newMultipleValue);
       }
     };
@@ -591,9 +603,10 @@ const Cascader = forwardRef(
                   {listItem.list.map((item, index) => (
                     <div
                       key={item.value}
+                      data-ischeckedall={item.children?.every((e) => e.checked)}
                       className={
                         listItem.index === index ||
-                        (props.multiple && item.checked)
+                        (!item.children && item.checked)
                           ? "cascader_popover_cell_label_box cascader_popover_cell_label_box_ac"
                           : "cascader_popover_cell_label_box"
                       }
@@ -610,9 +623,14 @@ const Cascader = forwardRef(
                           <>
                             <span className="icon">
                               <Checkbox
-                                onClick={(e) =>
-                                  handleChecked(e, listIndex, index)
-                                }
+                                onClick={(e) => {
+                                  if (
+                                    !item.isLoad ||
+                                    (item.children && item.children.length)
+                                  ) {
+                                    handleChecked(e, listIndex, index);
+                                  }
+                                }}
                                 checked={item.checked ? true : false}
                                 indeterminate={item.indeterminateChecked}
                               />
@@ -652,7 +670,7 @@ const Cascader = forwardRef(
               searchEmptyText={searchEmptyText}
               multiple={props.multiple}
               multipleValue={multipleValue}
-              list={searchList}
+              list={list}
               searchValue={searchValue}
               onChoose={handleOnChoose}
             />

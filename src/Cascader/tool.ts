@@ -9,7 +9,6 @@ const deepClone = (obj: CascaderOption[]): CascaderOption[] => {
   if (obj === null || typeof obj !== "object") {
     return obj;
   }
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const clone: any = Array.isArray(obj) ? [] : {};
 
@@ -69,6 +68,7 @@ const generateIdPid = (
     option.cascaderNodeId = id;
     option.checked = false;
     option.indeterminateChecked = false;
+
     valued.forEach((item) => {
       if (item.includes(option.value)) {
         option.checked = false;
@@ -77,7 +77,7 @@ const generateIdPid = (
     });
 
     option.parentCascaderNodeId = parentId;
-    if (option.children) {
+    if (option.children && option.children.length) {
       generateIdPid(option.children, valued, id);
       if (option.children?.every((e) => e.checked)) {
         option.checked = true;
@@ -120,7 +120,7 @@ const generatePathList = (
 
     if (node.children && node.children.length > 0) {
       generatePathList(node.children, newPath, newValue, list);
-    } else {
+    } else if (!node.isLoad) {
       list.push({
         value: "",
         pathName: newPath,

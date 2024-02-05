@@ -1,9 +1,10 @@
 import { memo, useEffect, useState } from "react";
-import { TreeSearchList } from "./tool";
+import { TreeSearchList, generatePathList } from "./tool";
 import Checkbox from "./svg/Checkbox";
+import { IListIF } from "./Cascader";
 
 interface SearchListIF {
-  list: TreeSearchList[];
+  list: IListIF[];
   multipleValue: string[];
   searchValue: string;
   multiple?: boolean;
@@ -20,14 +21,15 @@ const SearchList = memo(
     onChoose,
   }: SearchListIF) => {
     const [data, setData] = useState<TreeSearchList[]>([]);
-
     useEffect(() => {
       if (searchValue.length < 2) {
         return;
       }
       const delayDebounce = setTimeout(() => {
+        const options = list[0].list;
+        const searchList = generatePathList(options);
         setData(
-          list.filter((item) => {
+          searchList.filter((item) => {
             const valueArray = item.pathValue.split("/");
             item.value = valueArray[valueArray.length - 1];
             return item.pathName

@@ -14,19 +14,17 @@ function Default() {
       value: "120000",
       label: "天津市",
       isLoad: true,
-      children: [],
     },
     {
       value: "110000",
       label: "北京市",
       isLoad: true,
-      children: [],
     },
   ];
 
   const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
   const [valueAllPath, setValueAllPath] = useState<CascaderOption[]>([]);
-  const [value, setValue] = useState("120000");
+  const [value, setValue] = useState("");
   const [num, setNum] = useState(0);
   const [valueItem, setValueItem] = useState<CascaderOption | null>(null);
   const cascaderRef = useRef<CascaderRefProps>(null);
@@ -41,7 +39,7 @@ function Default() {
     console.log(value, valueAll);
 
     setValueItem(value);
-    setValue(value ? value.value : "");
+    // setValue(value ? value.value : "");
     setValueAllPath(valueAll);
   };
   const handleClear = () => {
@@ -64,8 +62,13 @@ function Default() {
 
         resolve([
           {
-            label: `${item.label} -1 `,
+            label: `${item.label}-1 `,
             value: item.value + 1,
+            isLoad: count >= 2 ? false : true,
+          },
+          {
+            label: `${item.label}-2 `,
+            value: item.value + 222,
             isLoad: count >= 2 ? false : true,
           },
         ]);
@@ -82,7 +85,7 @@ function Default() {
   return (
     <>
       <div style={{ width: "500px" }}>
-        <h3>单选 </h3>
+        <h3>动态加载 </h3>
         {value ? (
           <button onClick={handleClear}>清空VALUE</button>
         ) : (
@@ -120,6 +123,7 @@ function Default() {
         search
         ref={cascaderRef}
         value={value}
+        multiple
         open={open}
         anchorEl={anchorEl}
         options={options}
