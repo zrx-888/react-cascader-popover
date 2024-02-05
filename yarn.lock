@@ -1488,10 +1488,10 @@ queue-microtask@^1.2.2:
   resolved "https://registry.npmjs.org/queue-microtask/-/queue-microtask-1.2.3.tgz#4929228bbc724dfac43e0efb058caf7b6cfb6243"
   integrity sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==
 
-react-cascader-popover@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/react-cascader-popover/-/react-cascader-popover-1.1.1.tgz#bbed284fa07aee770d4333e4e3fa82e1b5ada2ee"
-  integrity sha512-148HqCXMndmlTzq1LB3y2f1eRV8mSOZdyYtZxtazWwLCFa0LXlKac1SsfM37QqKHMJKncU1Zbt5FO0YMoa/Eaw==
+react-cascader-popover@^1.1.7:
+  version "1.1.7"
+  resolved "https://registry.npmjs.org/react-cascader-popover/-/react-cascader-popover-1.1.7.tgz#6c100c29bd409bae4ef7caf957fe819c05a7940b"
+  integrity sha512-lqpS/M2Zt6pX+a0SNfa4B2ltPbb9qAdt/42RIBffYB0vS8UIcZezz7e4J3Kv/SVfnHDwfLK/almNBVkn5NPggw==
   dependencies:
     "@rollup/plugin-typescript" "^11.1.6"
     react "^18.2.0"

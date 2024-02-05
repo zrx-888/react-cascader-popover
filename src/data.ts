@@ -5,69 +5,32 @@ export const province = [
 
     children: [
       {
+        value: "120101232132132130",
+        label: "天津市2",
+        disabled: true,
+        children: [
+          {
+            value: "12010123213213213321",
+            label: "天津市2-1",
+          },
+          {
+            value: "1201012321321321234234",
+            label: "天津市2-2",
+          },
+        ],
+      },
+      {
         value: "120100",
         label: "天津市",
-        disabled: true,
         children: [
           {
             value: "120101",
             label: "hepingqu",
+            disabled: true,
           },
           {
             value: "120102",
             label: "hedongqu",
-          },
-          {
-            value: "120103",
-            label: "河西区",
-          },
-          {
-            value: "120104",
-            label: "南开区",
-          },
-          {
-            value: "120105",
-            label: "河北区",
-          },
-          {
-            value: "120106",
-            label: "红桥区",
-          },
-          {
-            value: "120110",
-            label: "东丽区",
-          },
-          {
-            value: "120111",
-            label: "西青区",
-          },
-          {
-            value: "120112",
-            label: "津南区",
-          },
-          {
-            value: "120113",
-            label: "北辰区",
-          },
-          {
-            value: "120114",
-            label: "武清区",
-          },
-          {
-            value: "120115",
-            label: "宝坻区",
-          },
-          {
-            value: "120116",
-            label: "滨海新区",
-          },
-          {
-            value: "120117",
-            label: "宁河区",
-          },
-          {
-            value: "120118",
-            label: "静海区",
           },
           {
             value: "120119",

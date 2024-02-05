@@ -1,9 +1,6 @@
 import { useRef, useState } from "react";
-import {
-  Cascader,
-  CascaderOption,
-  CascaderRefProps,
-} from "../Cascader/Cascader";
+import { CascaderOption, CascaderRefProps } from "react-cascader-popover";
+import { Cascader } from "../Cascader/Cascader";
 
 function Default() {
   const options = [
@@ -52,12 +49,13 @@ function Default() {
           {
             label: `${item.label}-1 `,
             value: item.value + 1,
-            isLoad: count >= 2 ? false : true,
+            disabled: count === 2,
+            isLoad: count >= 3 ? false : true,
           },
           {
             label: `${item.label}-2 `,
             value: item.value + 222,
-            isLoad: count >= 2 ? false : true,
+            isLoad: count >= 3 ? false : true,
           },
         ]);
       }, 1000);
@@ -106,6 +104,7 @@ function Default() {
         value={value}
         open={open}
         anchorEl={anchorEl}
+        multiple
         options={options}
         onClose={() => setAnchorEl(null)}
         onChange={handleChange}

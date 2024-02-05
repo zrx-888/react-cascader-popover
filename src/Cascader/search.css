@@ -59,3 +59,16 @@
   align-items: center;
   margin-right: 3px;
 }
+.cascader_popover_cell_label_disabled {
+  margin-top: 5px;
+  height: 35px;
+  background: #ffffff;
+  border-radius: 5px;
+  border: 1px solid #7a88fe;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}

@@ -199,7 +199,7 @@ import {
   Cascader,
   CascaderOption,
   CascaderRefProps,
-} from "../Cascader/Cascader";
+} from "react-cascader-popover";
 
 function Default() {
   const options = [

@@ -1,6 +1,7 @@
 import { CascaderOption, CascaderOptionMultiple } from "./Cascader";
 export interface TreeSearchList {
   checked?: boolean;
+  disabled?: boolean;
   pathName: string;
   pathValue: string;
   value: string;
@@ -118,11 +119,15 @@ const generatePathList = (
     const newPath = pathName ? `${pathName} / ${node.label}` : node.label;
     const newValue = pathValue ? `${pathValue}/${node.value}` : node.value;
 
-    if (node.children && node.children.length > 0) {
+    if (node.children && node.children.length > 0 && !node.disabled) {
       generatePathList(node.children, newPath, newValue, list);
-    } else if (!node.isLoad) {
+    } else if (
+      !node.isLoad &&
+      (!node.children || node.children?.length === 0)
+    ) {
       list.push({
         value: "",
+        disabled: node.disabled,
         pathName: newPath,
         pathValue: newValue,
       });

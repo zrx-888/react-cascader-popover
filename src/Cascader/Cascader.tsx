@@ -378,6 +378,7 @@ const Cascader = forwardRef(
         return;
       }
       const newOptions = deepClone(props.options);
+
       const parent = findParentItemWithIndex(
         props.loadData ? list[0].list : newOptions,
         targetValue,
@@ -404,7 +405,10 @@ const Cascader = forwardRef(
           props.onChange(selectValueOption[0], parent.parentItems);
         }
         setList([
-          { list: props.options, index: parent.parentIndexes[0] },
+          {
+            list: props.loadData ? list[0].list : props.options,
+            index: parent.parentIndexes[0],
+          },
           ...newList,
         ]);
       }

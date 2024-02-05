@@ -45,6 +45,9 @@ const SearchList = memo(
     }, [searchValue]);
 
     const handleClick = (item: TreeSearchList) => {
+      if (item.disabled) {
+        return;
+      }
       const values = item.pathValue.split("/");
       onChoose(values[values.length - 1]);
     };
@@ -56,7 +59,13 @@ const SearchList = memo(
             <div className="cascader_popover_cell">
               {data.map((item, listIndex) => (
                 <div key={listIndex} onClick={() => handleClick(item)}>
-                  <div className="cascader_popover_cell_label_box">
+                  <div
+                    className={
+                      item.disabled
+                        ? "cascader_popover_cell_label_box_disabled"
+                        : "cascader_popover_cell_label_box"
+                    }
+                  >
                     <div className="label">
                       {multiple ? (
                         <span className="icon">
