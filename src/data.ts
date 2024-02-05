@@ -2,10 +2,12 @@ export const province = [
   {
     value: "120000",
     label: "天津市",
+
     children: [
       {
         value: "120100",
         label: "天津市",
+        disabled: true,
         children: [
           {
             value: "120101",
@@ -90,6 +92,7 @@ export const province = [
               {
                 value: "110101111",
                 label: "东城区-1",
+                disabled: true,
               },
               {
                 value: "11010222",

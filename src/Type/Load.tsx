@@ -1,12 +1,9 @@
 import { useRef, useState } from "react";
-import { province } from "../data";
 import {
   Cascader,
   CascaderOption,
   CascaderRefProps,
 } from "../Cascader/Cascader";
-
-console.log(province);
 
 function Default() {
   const options = [
@@ -18,6 +15,7 @@ function Default() {
     {
       value: "110000",
       label: "北京市",
+      disabled: true,
       isLoad: true,
     },
   ];
@@ -41,16 +39,6 @@ function Default() {
     setValueItem(value);
     // setValue(value ? value.value : "");
     setValueAllPath(valueAll);
-  };
-  const handleClear = () => {
-    setValueItem(null);
-    setValueAllPath([]);
-    // 两种都可以清空
-    // setValue("");
-    cascaderRef.current?.clearValue();
-  };
-  const handleSet = () => {
-    setValue("11010333555");
   };
 
   // 模拟接口返回数据
@@ -86,13 +74,6 @@ function Default() {
     <>
       <div style={{ width: "500px" }}>
         <h3>动态加载 </h3>
-        {value ? (
-          <button onClick={handleClear}>清空VALUE</button>
-        ) : (
-          <>
-            <button onClick={handleSet}>设置value</button>
-          </>
-        )}
         <h6>value：{value}</h6>
         {valueItem ? (
           <h6>
@@ -123,7 +104,6 @@ function Default() {
         search
         ref={cascaderRef}
         value={value}
-        multiple
         open={open}
         anchorEl={anchorEl}
         options={options}

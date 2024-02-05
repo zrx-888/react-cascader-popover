@@ -11,7 +11,7 @@ console.log(province);
 function Default() {
   const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
   const [valueAllPath, setValueAllPath] = useState<CascaderOption[]>([]);
-  const [value, setValue] = useState("130203");
+  const [value, setValue] = useState("11010333555");
   const [valueItem, setValueItem] = useState<CascaderOption | null>(null);
   const cascaderRef = useRef<CascaderRefProps>(null);
 

@@ -190,6 +190,132 @@ export default Multiple;
 
 ```
 
+## 动态加载数据
+
+```js
+
+import { useRef, useState } from "react";
+import {
+  Cascader,
+  CascaderOption,
+  CascaderRefProps,
+} from "../Cascader/Cascader";
+
+function Default() {
+  const options = [
+    {
+      value: "120000",
+      label: "天津市",
+      isLoad: true,
+    },
+    {
+      value: "110000",
+      label: "北京市",
+      disabled: true,
+      isLoad: true,
+    },
+  ];
+
+  const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
+  const [valueAllPath, setValueAllPath] = useState<CascaderOption[]>([]);
+  const [value, setValue] = useState("");
+  const [num, setNum] = useState(0);
+  const [valueItem, setValueItem] = useState<CascaderOption | null>(null);
+  const cascaderRef = useRef<CascaderRefProps>(null);
+
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleChange = (
+    value: CascaderOption | null,
+    valueAll: CascaderOption[]
+  ) => {
+    console.log(value, valueAll);
+
+    setValueItem(value);
+    // setValue(value ? value.value : "");
+    setValueAllPath(valueAll);
+  };
+
+  // 模拟接口返回数据
+  const getServiceData = (item: CascaderOption) => {
+    return new Promise<CascaderOption[]>((resolve) => {
+      setTimeout(() => {
+        const count = num + 1;
+        setNum(count);
+
+        resolve([
+          {
+            label: `${item.label}-1 `,
+            value: item.value + 1,
+            isLoad: count >= 2 ? false : true,
+          },
+          {
+            label: `${item.label}-2 `,
+            value: item.value + 222,
+            isLoad: count >= 2 ? false : true,
+          },
+        ]);
+      }, 1000);
+    });
+  };
+
+  const loadData = async (item: CascaderOption) => {
+    const data = await getServiceData(item);
+    return data;
+  };
+
+  const open = Boolean(anchorEl);
+  return (
+    <>
+      <div style={{ width: "500px" }}>
+        <h3>动态加载 </h3>
+        <h6>value：{value}</h6>
+        {valueItem ? (
+          <h6>
+            valueItem：{valueItem.value}/{valueItem.label}
+          </h6>
+        ) : (
+          <></>
+        )}
+        {valueAllPath.length ? (
+          <h6>全路径：{valueAllPath.map((e) => e.label).join(" - ")}</h6>
+        ) : (
+          <></>
+        )}
+        <div className="cascader">
+          <div className="cascader_input_box" onClick={handleClick}>
+            {valueAllPath.length ? (
+              <div className="cascader_input">
+                {valueAllPath.map((e) => e.label).join(" - ")}
+              </div>
+            ) : (
+              <div className="placeholder">请选择</div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <Cascader
+        search
+        ref={cascaderRef}
+        value={value}
+        open={open}
+        anchorEl={anchorEl}
+        options={options}
+        onClose={() => setAnchorEl(null)}
+        onChange={handleChange}
+        loadData={loadData}
+      />
+    </>
+  );
+}
+
+export default Default;
+
+
+```
+
 ## API
 
 ### props
@@ -248,10 +374,10 @@ export default Multiple;
       <th>搜索框提示语</th>
     </tr>
     <tr>
-      <th>searchEmptyText</th>
-      <th>string</th>
-      <th>暂无数据</th>
-      <th>搜索后无数据提示语</th>
+      <th>loadData</th>
+      <th> (value: CascaderOption) => Promise&lt;CascaderOption[]&gt;</th>
+      <th></th>
+      <th>动态加载数据 options中要存在isLoad  配合 async await 使用</th>
     </tr>
     <tr>
       <th>onChange</th>
@@ -272,7 +398,7 @@ export default Multiple;
      <th>
          <div>setValue: (value: string[]) => void; </div>
          <div>clearValue: () => void; </div>
-         用户多选时使用
+         用于多选时使用
      </th>
     </tr>
   </tbody>
@@ -304,6 +430,18 @@ export default Multiple;
       <th>对应的value</th>
     </tr>
     <tr>
+      <th>disabled</th>
+      <th>boolean</th>
+      <th>false</th>
+      <th>禁用</th>
+    </tr>
+    <tr>
+      <th>isLoad</th>
+      <th>boolean</th>
+      <th>false</th>
+      <th>true=有下级数据</th>
+    </tr>
+    <tr>
       <th>children</th>
       <th>Array</th>
       <th></th>
@@ -321,3 +459,5 @@ export default Multiple;
 1.1.0 增加输入框筛选 修复 onChange 触发问题
 
 1.1.4 增加在多选搜索的时候可以选择多个
+
+1.1.5 增加 loadData 动态加载数据逻辑， options 中加入禁用

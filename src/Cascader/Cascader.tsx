@@ -16,6 +16,10 @@ export interface CascaderOption {
   label: string;
   value: string;
   /**
+   * 禁用
+   */
+  disabled?: boolean;
+  /**
    * 是否有下级  true=有下级  false=无下级
    */
   isLoad?: boolean;
@@ -140,12 +144,15 @@ const Cascader = forwardRef(
       listIndex: number,
       index: number
     ) => {
-      if (item.value === radioValue) {
+      // 当前选择的value跟上次value相同  || 禁用 ||  没有下级 && 不是多选,多选需要点击前面的icon选中
+      if (
+        item.value === radioValue ||
+        item.disabled ||
+        (!item.isLoad && props.multiple)
+      ) {
         return;
       }
-      if (!item.isLoad && props.multiple) {
-        return;
-      }
+
       const newList = [...list];
       if (!item.isLoad) {
         newList[listIndex].index = index;
@@ -202,7 +209,7 @@ const Cascader = forwardRef(
       listIndex: number,
       index: number
     ) => {
-      if (item.value === radioValue) {
+      if (item.value === radioValue || item.disabled) {
         return;
       }
       const newList = [...list];
@@ -223,14 +230,14 @@ const Cascader = forwardRef(
       }
 
       for (let i = newList.length - 1; i >= 0; i--) {
-        if (i > listIndex) {
+        if (i > listIndex && i != listIndex) {
           newList.splice(i, 1);
         }
       }
       if (item.children?.length) {
         newList[listIndex + 1] = {
           list: item.children,
-          index: -1,
+          index: item.children.findIndex((e) => e.value === radioValue),
         };
         newList[listIndex].index = index;
         setList(newList);
@@ -267,6 +274,9 @@ const Cascader = forwardRef(
       listIndex: number,
       index: number
     ) => {
+      if (list[listIndex].list[index].disabled) {
+        return;
+      }
       event.stopPropagation();
       const newList = [...list];
       newList[listIndex].list[index].checked =
@@ -605,8 +615,10 @@ const Cascader = forwardRef(
                       key={item.value}
                       data-ischeckedall={item.children?.every((e) => e.checked)}
                       className={
-                        listItem.index === index ||
-                        (!item.children && item.checked)
+                        item.disabled
+                          ? "cascader_popover_cell_label_box_disabled"
+                          : listItem.index === index ||
+                            (!item.children && item.checked)
                           ? "cascader_popover_cell_label_box cascader_popover_cell_label_box_ac"
                           : "cascader_popover_cell_label_box"
                       }
