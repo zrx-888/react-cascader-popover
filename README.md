@@ -368,6 +368,12 @@ export default Default;
       <th>是否开启搜索</th>
     </tr>
     <tr>
+      <th>searchEmptyText</th>
+      <th>string</th>
+      <th>暂无数据</th>
+      <th>搜索为空提示</th>
+    </tr>
+    <tr>
       <th>searchPlaceholder</th>
       <th>string</th>
       <th>请输入关键词</th>
