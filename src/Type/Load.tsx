@@ -1,6 +1,9 @@
 import { useRef, useState } from "react";
-import { CascaderOption, CascaderRefProps } from "react-cascader-popover";
-import { Cascader } from "../Cascader/Cascader";
+import {
+  Cascader,
+  CascaderOption,
+  CascaderRefProps,
+} from "react-cascader-popover";
 
 function Default() {
   const options = [
@@ -19,7 +22,7 @@ function Default() {
 
   const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
   const [valueAllPath, setValueAllPath] = useState<CascaderOption[]>([]);
-  const [value, setValue] = useState("");
+  const [value] = useState("");
   const [num, setNum] = useState(0);
   const [valueItem, setValueItem] = useState<CascaderOption | null>(null);
   const cascaderRef = useRef<CascaderRefProps>(null);

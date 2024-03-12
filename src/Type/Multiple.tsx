@@ -1,12 +1,15 @@
 import { useRef, useState } from "react";
-import { CascaderOption, CascaderRefProps } from "react-cascader-popover";
 import { province } from "../data";
-import { Cascader } from "../Cascader/Cascader";
+import {
+  Cascader,
+  CascaderOption,
+  CascaderRefProps,
+} from "react-cascader-popover";
 
 function Multiple() {
   const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
   const [valueAll, setValueAll] = useState<CascaderOption[]>([]);
-  const [value, setValue] = useState("11010333555");
+  const [value] = useState("11010333555");
   const cascaderRef = useRef<CascaderRefProps>(null);
   // 打开
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
