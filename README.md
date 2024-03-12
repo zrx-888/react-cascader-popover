@@ -12,7 +12,7 @@ src/Type 有完整演示
  yarn add react-cascader-popover
 ```
 ## demo
-[https://react-cascader-popover-eyrp.vercel.app/]([http://www.baidu.com/](https://react-cascader-popover-eyrp.vercel.app/))
+[https://react-cascader-popover-eyrp.vercel.app/](https://react-cascader-popover-eyrp.vercel.app/)
 
 ## 单选
 
