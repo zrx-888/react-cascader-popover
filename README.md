@@ -14,6 +14,10 @@ src/Type 有完整演示
 
 ## demo
 
+[[打开链接](https://react-cascader-popover-eyrp.vercel.app/)](https://react-cascader-popover-eyrp.vercel.app/){:target="\_blank"}
+
+## demo
+
 [https://react-cascader-popover-eyrp.vercel.app/](https://react-cascader-popover-eyrp.vercel.app/){:target="\_blank"}
 
 ## 单选
