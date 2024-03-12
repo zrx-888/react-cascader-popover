@@ -11,9 +11,10 @@ src/Type 有完整演示
 或者
  yarn add react-cascader-popover
 ```
-## demo
-https://react-cascader-popover-eyrp.vercel.app/
 
+## demo
+
+[https://react-cascader-popover-eyrp.vercel.app/](https://react-cascader-popover-eyrp.vercel.app/){:target="\_blank"}
 
 ## 单选
 
