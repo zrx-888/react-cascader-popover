@@ -11,7 +11,7 @@ src/Type 有完整演示
 或者
  yarn add react-cascader-popover
 ```
-## Install
+## demo
 https://react-cascader-popover-eyrp.vercel.app/
 
 
