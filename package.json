@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-cascader-popover": "^1.1.9",
+    "react-cascader-popover": "^1.2.4",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
