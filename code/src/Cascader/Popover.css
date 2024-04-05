@@ -1,0 +1,28 @@
+.Popover {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  z-index: 1300;
+}
+.Popover-root {
+  opacity: 0;
+  position: absolute;
+  transition: opacity 0.1s ease-in;
+}
+.Popover-root-hide {
+  opacity: 0;
+}
+.Popover-root-show {
+  opacity: 1;
+}
+.Popover-invisible {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  transition: opacity 0.3s linear;
+}

@@ -1,0 +1,74 @@
+.searchList {
+  border: 1px solid #7a88fe;
+  background: #fff;
+  border-radius: 10px;
+  margin-top: 5px;
+  max-height: 350px;
+  height: 300px;
+  overflow-y: hidden;
+}
+.searchList .label {
+  margin-right: 0;
+}
+.cascader_search_box {
+  margin-top: 5px;
+  height: 35px;
+  background: #ffffff;
+  border-radius: 5px;
+  border: 1px solid #7a88fe;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+.cascader_search_input {
+  width: 100%;
+  padding: 0 10px;
+  border: 0;
+  height: 90%;
+  outline: 0;
+  position: absolute;
+  box-sizing: border-box;
+}
+.slash {
+  margin: 0 4px;
+}
+.search_text_ac {
+  color: red;
+}
+.empty_data {
+  width: 150px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #7a88fe;
+  background: #fff;
+  border-radius: 10px;
+  margin-top: 5px;
+  font-size: 13px;
+  color: #999;
+  letter-spacing: 3px;
+  cursor: no-drop;
+}
+.icon {
+  color: #8190b8;
+  display: flex;
+  align-items: center;
+  margin-right: 3px;
+}
+.cascader_popover_cell_label_disabled {
+  margin-top: 5px;
+  height: 35px;
+  background: #ffffff;
+  border-radius: 5px;
+  border: 1px solid #7a88fe;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}

@@ -1,0 +1,58 @@
+{
+  "name": "react-cascader-popover",
+  "private": false,
+  "version": "1.2.6",
+  "type": "module",
+  "keywords": [
+    "react",
+    "cascader",
+    "select",
+    "react-cascader",
+    "react-cascader-popover",
+    "react-cascader-popover-component"
+  ],
+  "description": "react级联选择器/支持多选/单选",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zrx-888/react-cascader-popover"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/react-cascader-popover.umd.js",
+  "module": "./dist/react-cascader-popover.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/react-cascader-popover.es.js",
+      "require": "./dist/react-cascader-popover.umd.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@rollup/plugin-typescript": "^11.1.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tslib": "^2.6.2",
+    "vite-plugin-libcss": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/parser": "^6.14.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^8.55.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.8"
+  }
+}
